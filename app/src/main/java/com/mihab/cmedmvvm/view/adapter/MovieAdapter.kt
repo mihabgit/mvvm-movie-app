@@ -12,6 +12,7 @@ import com.mihab.cmedmvvm.service.model.Movie
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private var movieList = ArrayList<Movie>()
+    private lateinit var onClickListener: OnClickListener
 
     @SuppressLint("NotifyDataSetChanged")
     fun setMovieList(movieList: List<Movie>) {
@@ -47,11 +48,23 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
             tvHouseName.text = "House Name: ${movie.house}"
         }
 
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(position, movie)
+        }
+
 
     }
 
     override fun getItemCount(): Int {
         return movieList.size
+    }
+
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
+    interface OnClickListener {
+        fun onClick(position: Int, movie: Movie)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mihab.cmedmvvm.view.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 
 import com.mihab.cmedmvvm.databinding.ActivityMainBinding
+import com.mihab.cmedmvvm.service.model.Movie
 import com.mihab.cmedmvvm.view.adapter.MovieAdapter
 import com.mihab.cmedmvvm.viewmodel.MovieViewModel
 
@@ -40,6 +42,15 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity, VERTICAL, false)
             adapter = movieAdapter
         }
+
+        movieAdapter.setOnClickListener(object : MovieAdapter.OnClickListener {
+            override fun onClick(position: Int, movie: Movie) {
+                val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+                intent.putExtra("character-details", movie)
+                startActivity(intent)
+            }
+        })
+
     }
 
 }
