@@ -24,7 +24,7 @@ class CharacterViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<List<Character>>, t: Throwable) {
-                Log.d("MovieViewModel", t.message.toString())
+                Log.d("CharacterViewModel", t.message.toString())
             }
 
         })
