@@ -2,13 +2,14 @@ package com.mihab.cmedmvvm.view.ui
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.os.Build.VERSION
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.mihab.cmedmvvm.R
 import com.mihab.cmedmvvm.databinding.ActivityDetailsBinding
-import com.mihab.cmedmvvm.service.model.Movie
+import com.mihab.cmedmvvm.service.model.Character
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -24,9 +25,14 @@ class DetailsActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        var characterDetails : Movie? = null
+        var characterDetails : Character? = null
         if (intent.hasExtra("character-details")) {
-            characterDetails = intent.getParcelableExtra("character-details", Movie::class.java)
+            characterDetails = if (VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("character-details", Character::class.java)
+            } else {
+                intent.getParcelableExtra("character-details")
+            }
+
         }
 
         if (characterDetails != null) {

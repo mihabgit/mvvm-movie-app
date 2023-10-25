@@ -7,16 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mihab.cmedmvvm.R
 import com.mihab.cmedmvvm.databinding.ItemMovieBinding
-import com.mihab.cmedmvvm.service.model.Movie
+import com.mihab.cmedmvvm.service.model.Character
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
-    private var movieList = ArrayList<Movie>()
+    private var characterList = ArrayList<Character>()
     private lateinit var onClickListener: OnClickListener
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setMovieList(movieList: List<Movie>) {
-        this.movieList = movieList as ArrayList<Movie>
+    fun setMovieList(movieList: List<Character>) {
+        this.characterList = movieList as ArrayList<Character>
         notifyDataSetChanged()
     }
 
@@ -35,28 +35,28 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val movie = movieList[position]
+        val character = characterList[position]
 
         holder.binding.apply {
             Glide.with(holder.itemView)
-                .load(movie.image)
+                .load(character.image)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(ivMovieImage)
 
-            tvName.text = "Name: ${movie.name}"
-            tvActorName.text = "Actor Name: ${movie.actor}"
-            tvHouseName.text = "House Name: ${movie.house}"
+            tvName.text = "Name: ${character.name}"
+            tvActorName.text = "Actor Name: ${character.actor}"
+            tvHouseName.text = "House Name: ${character.house}"
         }
 
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(position, movie)
+            onClickListener.onClick(position, character)
         }
 
 
     }
 
     override fun getItemCount(): Int {
-        return movieList.size
+        return characterList.size
     }
 
     fun setOnClickListener(onClickListener: OnClickListener) {
@@ -64,7 +64,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     }
 
     interface OnClickListener {
-        fun onClick(position: Int, movie: Movie)
+        fun onClick(position: Int, movie: Character)
     }
 
 }
